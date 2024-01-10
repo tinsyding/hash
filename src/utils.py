@@ -51,9 +51,10 @@ def generate_sha256_csv(prefix_list, tel_version):
     header = ['Number', 'sha256']
 
     for prefix in prefix_list:
-        csv_folder = 'csv'
+        csv_folder = os.path.join('.', 'csv')
         if not os.path.exists(csv_folder):
             os.makedirs(csv_folder)
+
 
         csv_file_path = os.path.join(csv_folder, f'{prefix}.csv')
 
