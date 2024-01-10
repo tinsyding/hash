@@ -27,6 +27,23 @@ def generate_numbers_plus86(prefix):
 def generate_numbers_test(prefix):
     for i in range(1000, 10000):
         yield prefix + str(i)[1:]
+        
+# 计算哈希值(sha256)
+def get_sha256(string):
+    return hashlib.sha256(string.encode('utf-8')).hexdigest()
+
+# 计算哈希值(md5)
+def get_md5(string):
+    return hashlib.md5(string.encode('utf-8')).hexdigest()
+
+# 查找原数值
+def find_number(hash_value, csv_path):
+    with open(csv_path, 'r') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        for row in csv_reader:
+            if row[1] == hash_value:
+                return row[0]
+    return 'Not found'
 
 # 生成csv文件
 def generate_sha256(prefix_list, tel_version):
@@ -45,7 +62,7 @@ def generate_sha256(prefix_list, tel_version):
             csv_writer.writerow(header)
 
             for number in tel_version(prefix):
-                hash_value = hashlib.sha256(number.encode('utf-8')).hexdigest()
+                hash_value = get_sha256(number)
                 csv_writer.writerow([number, hash_value])
                 print(f'{number} {hash_value}')
 
@@ -55,17 +72,3 @@ def generate_sha256(prefix_list, tel_version):
     end_time = time.time()
     total_time = end_time - start_time
     print(f'完成，共耗时 {total_time:.2f} 秒')
-
-
-
-prefixes = ['134', '135', '136', '137', '138', '139', '144', '147', '148', '150', '151', '152', '157', '158', '159', '172', '178', '182', '183', '184', '187', '188', '195', '197', '198', '130', '131', '132', '145', '155', '156', '166', '167', '171', '175', '176', '185', '186', '196', '133', '149', '153', '173', '177', '180', '181', '189', '190', '191', '193', '199', '192']
-
-test = ['999']
-
-def main():
-    # generate_sha256(test, generate_numbers_test)
-    generate_sha256(prefixes, generate_numbers_null)
-    # 一个号段大概生成 65.3G 的csv文件，生成时间大概在 30000 秒左右
-
-if __name__ == '__main__':
-    main()
