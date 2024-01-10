@@ -62,5 +62,10 @@ prefixes = ['134', '135', '136', '137', '138', '139', '144', '147', '148', '150'
 
 test = ['155']
 
+def main():
+    # generate_sha256(test, generate_numbers_test)
+    generate_sha256(prefixes, generate_numbers_null)
+    # 一个号段大概生成 65.3G 的csv文件，生成时间大概在 30000 秒左右
+
 if __name__ == '__main__':
     main()
