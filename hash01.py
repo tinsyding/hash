@@ -47,6 +47,7 @@ def generate_sha256(prefix_list, tel_version):
             for number in tel_version(prefix):
                 hash_value = hashlib.sha256(number.encode('utf-8')).hexdigest()
                 csv_writer.writerow([number, hash_value])
+                print(f'{number} {hash_value}')
 
         file_size = os.path.getsize(csv_file_path)
         print(f'{csv_file_path} 文件大小: {file_size / (1024 * 1024):.2f} MB')
@@ -59,12 +60,7 @@ def generate_sha256(prefix_list, tel_version):
 
 prefixes = ['134', '135', '136', '137', '138', '139', '144', '147', '148', '150', '151', '152', '157', '158', '159', '172', '178', '182', '183', '184', '187', '188', '195', '197', '198', '130', '131', '132', '145', '155', '156', '166', '167', '171', '175', '176', '185', '186', '196', '133', '149', '153', '173', '177', '180', '181', '189', '190', '191', '193', '199', '192']
 
-test = ['000', '001']
-
-
-def main():
-    generate_sha256(test, generate_numbers_test)
-    # generate_sha256(prefixes, generate_numbers_null)
+test = ['155']
 
 if __name__ == '__main__':
     main()
