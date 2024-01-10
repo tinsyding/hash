@@ -1,4 +1,4 @@
-from src.utils import find_number
+from utils import find_number
 
 def main():
     hash_value = input("请输入哈希值：")

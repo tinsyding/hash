@@ -46,7 +46,7 @@ def find_number(hash_value, csv_path):
     return 'Not found'
 
 # 生成csv文件
-def generate_sha256(prefix_list, tel_version):
+def generate_sha256_csv(prefix_list, tel_version):
     start_time = time.time()
     header = ['Number', 'sha256']
 
